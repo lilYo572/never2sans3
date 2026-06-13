@@ -10,80 +10,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Pirata+One&family=Pacifico&family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<!-- OVERLAYS -->
 <canvas id="cv-bg"></canvas>
-<div id="scanlines"></div>
-<div id="noise"></div>
-<div id="hline"></div>
-<div id="logs"></div>
-<div id="fl-w"></div>
-<div id="fl-r"></div>
+<div id="scanlines"></div><div id="noise"></div><div id="hline"></div>
+<div id="logs"></div><div id="fl-w"></div><div id="fl-r"></div>
 
-<!-- P0: SPLASH -->
+<!-- P0 SPLASH -->
 <div id="p0" class="ph on">
   <span class="c-tl"></span><span class="c-tr"></span><span class="c-bl"></span><span class="c-br"></span>
-  <span class="hud hud-tl">N2S3 v3.0.0</span>
-  <span class="hud hud-tr">SYSTÈME OFFLINE</span>
-  <span class="hud hud-bl">LILLE_SECTOR</span>
-  <span class="hud hud-br">AWAITING INPUT</span>
+  <span class="hud hud-tl">N2S3 v3.0.0</span><span class="hud hud-tr">SYSTÈME OFFLINE</span>
+  <span class="hud hud-bl">LILLE_SECTOR</span><span class="hud hud-br">AWAITING INPUT</span>
   <button id="btn-start">COMMENCER</button>
-  <p class="splash-hint">▸ APPUYER POUR INITIALISER ◂</p>
+  <p class="splash-hint">&#9658; APPUYER POUR INITIALISER &#9668;</p>
 </div>
 
-<!-- P1: LOGOS -->
+<!-- P1 LOGOS -->
 <div id="p1" class="ph">
-  <div id="logo-imagine" class="logo-blk">
-    <p class="logo-main">IMAGINe Studio</p>
-    <p class="logo-sub">PRODUCTION DIVISION — CLASS A</p>
-  </div>
+  <div id="logo-imagine" class="logo-blk"><p class="logo-main">IMAGINe Studio</p><p class="logo-sub">PRODUCTION DIVISION — CLASS A</p></div>
   <div id="logo-div" class="logo-divr"></div>
-  <div id="logo-hwr" class="logo-blk">
-    <p class="logo-sub2">HwR Engine</p>
-    <p class="logo-sub">RENDERING FRAMEWORK 4.1</p>
-  </div>
+  <div id="logo-hwr" class="logo-blk"><p class="logo-sub2">HwR Engine</p><p class="logo-sub">RENDERING FRAMEWORK 4.1</p></div>
   <p id="logo-presents">PRÉSENTE</p>
 </div>
 
-<!-- P2: BOOT -->
+<!-- P2 BOOT -->
 <div id="p2" class="ph">
-  <div id="boot-wrap">
-    <div id="boot-lines"></div>
-    <div id="boot-progress">
-      <div id="boot-bar"></div>
-      <p id="boot-label">INITIALISATION...</p>
-    </div>
-  </div>
+  <div id="boot-wrap"><div id="boot-lines"></div><div id="boot-progress"><div id="boot-bar"></div><p id="boot-label">INITIALISATION...</p></div></div>
 </div>
 
-<!-- P3: TRANSITION CANVAS -->
+<!-- P3 TRANSITION -->
 <div id="p3" class="ph"><canvas id="cv-trans"></canvas></div>
 
-<!-- P4: TITLE -->
+<!-- P4 TITLE -->
 <div id="p4" class="ph">
   <span class="c-tl"></span><span class="c-tr"></span><span class="c-bl"></span><span class="c-br"></span>
-  <span class="hud hud-tl">BRADPROTOCOL ACTIVE</span>
-  <span class="hud hud-tr">ÉDITION III</span>
+  <span class="hud hud-tl">BRADPROTOCOL ACTIVE</span><span class="hud hud-tr">ÉDITION III</span>
   <p id="t-edition">— TROISIÈME ÉDITION —</p>
   <h1 id="t-main">Never <span class="num">2</span> sans <span class="num big">3</span></h1>
   <div id="t-line"></div>
   <p id="t-tagline">LILLE — PROTOCOLE ACTIVÉ</p>
   <div id="kirby-alert" class="hidden">
-    <p class="alert-txt">⚠ KIRBY 67 DÉTECTÉ À LILLE ⚠</p>
+    <p class="alert-txt">&#9888; KIRBY 67 DÉTECTÉ À LILLE &#9888;</p>
     <p class="alert-sub">INTERCEPTION REQUISE — IMMÉDIATEMENT</p>
   </div>
-  <button id="btn-proto">↳ ENTER THE PROTOCOL</button>
+  <button id="btn-proto">&#8627; ENTER THE PROTOCOL</button>
 </div>
 
-<!-- P5: COUNTDOWN -->
+<!-- P5 COUNTDOWN -->
 <div id="p5" class="ph">
   <span class="c-tl"></span><span class="c-tr"></span><span class="c-bl"></span><span class="c-br"></span>
-  <span class="hud hud-tl">N2S3 PROTOCOL</span>
-  <span class="hud hud-tr">MISSION PENDING</span>
-  <div class="cd-top">
-    <p class="cd-title">NEVER 2 SANS 3</p>
-    <p class="cd-sub">DÉCLENCHEMENT OPÉRATION — T-MINUS</p>
-  </div>
+  <span class="hud hud-tl">N2S3 PROTOCOL</span><span class="hud hud-tr">MISSION PENDING</span>
+  <div class="cd-top"><p class="cd-title">NEVER 2 SANS 3</p><p class="cd-sub">DÉCLENCHEMENT OPÉRATION — T-MINUS</p></div>
   <div class="cd-wrap">
     <div class="cd-unit"><div class="cd-val" id="cd-d" data-v="00">00</div><p class="cd-lbl">JOURS</p></div>
     <span class="cd-col">:</span>
@@ -93,105 +68,73 @@
     <span class="cd-col">:</span>
     <div class="cd-unit"><div class="cd-val" id="cd-s" data-v="00">00</div><p class="cd-lbl">SEC</p></div>
   </div>
-  <div class="cd-bot">
-    <div class="cd-status"><div class="cd-dot"></div><span>SYSTEM MONITORING ACTIVE</span><div class="cd-dot"></div></div>
-  </div>
-  <button id="btn-skip-cd">PASSER →</button>
+  <div class="cd-bot"><div class="cd-status"><div class="cd-dot"></div><span>SYSTEM MONITORING ACTIVE</span><div class="cd-dot"></div></div></div>
+  <button id="btn-skip-cd">PASSER &#8594;</button>
 </div>
 
-<!-- P6: ACTION -->
+<!-- P6 ACTION -->
 <div id="p6" class="ph">
   <span class="c-tl"></span><span class="c-tr"></span><span class="c-bl"></span><span class="c-br"></span>
-  <span class="hud hud-tl">BRAD EN LIGNE</span>
-  <span class="hud hud-tr">SÉQUENCE PRÊTE</span>
-  <p class="action-lbl">PROTOCOLE N2S3 — ÉDITION III<br>SÉQUENCE INITIALISÉE<br>▸ BRAD EST EN LIGNE ◂</p>
+  <span class="hud hud-tl">BRAD EN LIGNE</span><span class="hud hud-tr">SÉQUENCE PRÊTE</span>
+  <p class="action-lbl">PROTOCOLE N2S3 — ÉDITION III<br>SÉQUENCE INITIALISÉE<br>&#9658; BRAD EST EN LIGNE &#9668;</p>
   <button id="btn-action">ACTION</button>
   <p class="action-hint">ENTRER LE CODE POUR CONTINUER</p>
 </div>
 
-<!-- P7: VIDEO -->
+<!-- P7 VIDEO -->
 <div id="p7" class="ph">
-  <div id="yt-wrap">
-    <iframe id="yt-frame" src="about:blank" allow="autoplay;encrypted-media" allowfullscreen></iframe>
-  </div>
-  <button id="btn-enter-app">ACCÉDER AU SYSTÈME →</button>
+  <div id="yt-wrap"><iframe id="yt-frame" src="about:blank" allow="autoplay;encrypted-media" allowfullscreen></iframe></div>
+  <button id="btn-enter-app">ACCÉDER AU SYSTÈME &#8594;</button>
 </div>
 
-<!-- ============ MAIN APP ============ -->
+<!-- APP -->
 <div id="app">
   <header id="topbar">
     <div id="time-disp">--h--</div>
     <button id="topbar-chat" data-nav="chat">CHAT<sup id="chat-badge"></sup></button>
   </header>
-
   <main id="pages">
 
-    <!-- HOME -->
     <section class="page" id="page-home">
       <div id="map-wrap">
         <canvas id="cv-map"></canvas>
-        <div id="map-overlay">
-          <p id="map-label-txt">LILLE — SECTEUR ACTIF</p>
-          <p id="map-coords-txt">50°37'N &nbsp;3°03'E</p>
-        </div>
+        <div id="map-overlay"><p id="map-label-txt">LILLE — SECTEUR ACTIF</p><p id="map-coords-txt">50&#176;37'N &nbsp;3&#176;03'E</p></div>
         <div id="zones-container"></div>
-        <div id="kirby-blip">
-          <div class="blip-ring r1"></div><div class="blip-ring r2"></div>
-          <div class="blip-dot"></div>
-          <p class="blip-lbl">K67</p>
-        </div>
+        <div id="kirby-blip"><div class="blip-ring r1"></div><div class="blip-ring r2"></div><div class="blip-dot"></div><p class="blip-lbl">K67</p></div>
       </div>
-      <div id="map-status-bar">
-        <span class="cd-dot"></span>
-        <span id="map-status-txt">ANALYSE EN COURS — KIRBY 67 NON LOCALISÉ</span>
-      </div>
+      <div id="map-status-bar"><span class="cd-dot"></span><span id="map-status-txt">ANALYSE EN COURS — KIRBY 67 NON LOCALISÉ</span></div>
     </section>
 
-    <!-- CHAT -->
     <section class="page" id="page-chat">
-      <div class="page-hdr">
-        <button class="back-btn">←</button>
-        <div><h2 class="page-title pirata">CHAT</h2><p class="page-sub">en direct <em>(ou presque)</em></p></div>
-      </div>
-      <div id="chat-status-bar">
-        <span class="pacifico brad-name-lbl">Brad Bitt</span>
-        <span class="cd-dot"></span>
-        <span id="brad-status-lbl">En ligne</span>
-      </div>
+      <div class="page-hdr"><button class="back-btn">&#8592;</button><div><h2 class="page-title pirata">CHAT</h2><p class="page-sub">en direct <em>(ou presque)</em></p></div></div>
+      <div id="chat-status-bar"><span class="pacifico brad-name-lbl">Brad Bitt</span><span class="cd-dot"></span><span id="brad-status-lbl">En ligne</span></div>
       <div id="chat-msgs"></div>
       <div id="chat-typing" class="hidden"><span class="pacifico">Brad Bitt</span> est en train d'écrire<span class="tdots">...</span></div>
-      <div id="chat-bar">
-        <input type="text" id="chat-inp" placeholder="Écrivez ici..." maxlength="200" autocomplete="off">
-        <button id="chat-send-btn">→</button>
-      </div>
+      <div id="chat-bar"><input type="text" id="chat-inp" placeholder="Écrivez ici..." maxlength="200" autocomplete="off"><button id="chat-send-btn">&#8594;</button></div>
     </section>
 
-    <!-- GAGES -->
     <section class="page" id="page-gages">
-      <div class="page-hdr"><button class="back-btn">←</button><h2 class="page-title pirata">Gages</h2></div>
+      <div class="page-hdr"><button class="back-btn">&#8592;</button><h2 class="page-title pirata">Gages</h2></div>
       <p class="brad-quote pacifico">Brad Bitt : Voici vos petites missions</p>
       <div id="gages-body"></div>
     </section>
 
-    <!-- BONUS -->
     <section class="page" id="page-bonus">
-      <div class="page-hdr"><button class="back-btn">←</button><h2 class="page-title pirata">Bonus</h2></div>
+      <div class="page-hdr"><button class="back-btn">&#8592;</button><h2 class="page-title pirata">Bonus</h2></div>
       <p class="brad-quote pacifico">Brad Bitt : C'est trop good les bonus</p>
       <div class="bonus-cat-hdr utile-hdr">UTILES :</div>
-      <button class="bonus-row" data-bonus="gageSecondaire">Gage secondaire</button>
-      <button class="bonus-row" data-bonus="laisserPasser">Laisser passer</button>
-      <button class="bonus-row" data-bonus="refaireRoue">Refaire la roue</button>
+      <button class="bonus-row" data-bonus="gageSecondaire">Gage secondaire <span class="bonus-bc">15 BC</span></button>
+      <button class="bonus-row" data-bonus="refaireRoue">Refaire la roue <span class="bonus-bc">20 BC</span></button>
+      <button class="bonus-row" data-bonus="laisserPasser">Laisser Passer <span class="bonus-bc">25 BC</span></button>
       <div class="bonus-cat-hdr chaos-hdr">CHAOTIQUE :</div>
-      <button class="bonus-row chaos" data-bonus="doubleTimbre">Double Tirage</button>
-      <button class="bonus-row chaos" data-bonus="imposerGage">Imposer un Gage</button>
-      <button class="bonus-row chaos" data-bonus="declencherEvenement">Déclencher un événement</button>
+      <button class="bonus-row chaos" data-bonus="doubleTimbre">Double Tirage <span class="bonus-bc">25 BC</span></button>
+      <button class="bonus-row chaos" data-bonus="imposerGage">Imposer un Gage <span class="bonus-bc">30 BC</span></button>
+      <button class="bonus-row chaos" data-bonus="declencherEvenement">Déclencher un événement <span class="bonus-bc">50 BC</span></button>
     </section>
 
-    <!-- BONUS DETAIL -->
     <section class="page" id="page-bonus-detail">
-      <div class="page-hdr"><button class="back-btn">←</button><h2 id="bd-title" class="page-title pirata">Bonus</h2></div>
-      <p id="bd-desc" class="bd-desc"></p>
-      <p id="bd-stock" class="bd-stock"></p>
+      <div class="page-hdr"><button class="back-btn">&#8592;</button><h2 id="bd-title" class="page-title pirata">Bonus</h2></div>
+      <p id="bd-desc" class="bd-desc"></p><p id="bd-stock" class="bd-stock"></p>
       <h3 class="player-sel-title">CHOISIR LA PERSONNE :</h3>
       <div id="player-grid">
         <button class="player-btn" data-player="hippolyte"><span>Hippolyte</span><span id="cost-hippolyte" class="player-cost">— BC</span></button>
@@ -199,39 +142,29 @@
         <button class="player-btn" data-player="edwin"><span>Edwin</span><span id="cost-edwin" class="player-cost">— BC</span></button>
         <button class="player-btn" data-player="teo"><span>Téo</span><span id="cost-teo" class="player-cost">— BC</span></button>
       </div>
-      <div id="purchase-confirm" class="hidden">
-        <p>Acheter pour <strong id="purch-name">—</strong> ?</p>
-        <div class="purch-btns">
-          <button id="purch-yes">Oui</button>
-          <button id="purch-no">Non</button>
-        </div>
-      </div>
+      <div id="purchase-confirm" class="hidden"><p>Acheter pour <strong id="purch-name">—</strong> ?</p><div class="purch-btns"><button id="purch-yes">Oui</button><button id="purch-no">Non</button></div></div>
       <p id="purch-feedback" class="hidden"></p>
     </section>
 
-    <!-- BRADDY3000 -->
     <section class="page" id="page-braddy">
-      <div class="page-hdr"><button class="back-btn">←</button><h2 class="page-title bebas braddy-h">BRADDY3000</h2></div>
+      <div class="page-hdr"><button class="back-btn">&#8592;</button><h2 class="page-title bebas braddy-h">BRADDY3000</h2></div>
       <p class="brad-quote pacifico">Brad Bitt : Voici votre chouette progression</p>
       <div id="braddy-body"></div>
     </section>
 
-    <!-- DOSSIERS -->
     <section class="page" id="page-dossiers">
-      <div class="page-hdr"><button class="back-btn">←</button><h2 class="page-title pirata">Dossiers</h2></div>
+      <div class="page-hdr"><button class="back-btn">&#8592;</button><h2 class="page-title pirata">Dossiers</h2></div>
       <p class="brad-quote pacifico">Brad Bitt : Voyons voir ce qui s'y cache</p>
       <div id="dossiers-list"></div>
     </section>
 
-    <!-- DOSSIER DETAIL -->
     <section class="page" id="page-dossier-detail">
-      <div class="page-hdr"><button class="back-btn">←</button><h2 id="dd-title" class="page-title pirata">Dossier</h2></div>
+      <div class="page-hdr"><button class="back-btn">&#8592;</button><h2 id="dd-title" class="page-title pirata">Dossier</h2></div>
       <div id="dd-body" class="dossier-body"></div>
     </section>
 
-    <!-- AIDE -->
     <section class="page" id="page-aide">
-      <div class="page-hdr"><button class="back-btn">←</button><h2 class="page-title pirata">Aide</h2></div>
+      <div class="page-hdr"><button class="back-btn">&#8592;</button><h2 class="page-title pirata">Aide</h2></div>
       <p class="brad-quote pacifico">Brad Bitt : Qu'as-tu besoin de savoir ?</p>
       <div class="aide-links">
         <button class="aide-btn" data-aide="lore">Le LORE</button>
@@ -245,14 +178,12 @@
       </div>
     </section>
 
-    <!-- AIDE DETAIL -->
     <section class="page" id="page-aide-detail">
-      <div class="page-hdr"><button class="back-btn">←</button><h2 id="ad-title" class="page-title pirata">Aide</h2></div>
+      <div class="page-hdr"><button class="back-btn">&#8592;</button><h2 id="ad-title" class="page-title pirata">Aide</h2></div>
       <div id="ad-body" class="aide-body"></div>
     </section>
 
   </main>
-
   <nav id="bottomnav">
     <div class="nav-row">
       <button class="nav-btn pirata" data-nav="aide">Aide</button>
@@ -264,6 +195,49 @@
       <button class="nav-btn pirata" data-nav="dossiers">Dossiers</button>
     </div>
   </nav>
+</div>
+
+<!-- ROULETTE OVERLAY -->
+<div id="roulette-ol" class="full-ol hidden">
+  <div class="roll-top">
+    <span class="roll-phase-lbl" id="roll-phase-lbl">PHASE 1</span>
+    <h3 class="roll-gname" id="roll-gname">—</h3>
+    <p class="roll-gdesc" id="roll-gdesc"></p>
+    <p class="roll-bc-lbl" id="roll-bc-lbl">+5 BC</p>
+  </div>
+  <div class="roll-wheel-wrap">
+    <div class="roll-ptr">&#9660;</div>
+    <canvas id="roll-cv" width="280" height="280"></canvas>
+  </div>
+  <button id="roll-btn">TOURNER</button>
+  <div id="roll-result" class="hidden">
+    <p class="roll-winner-label">AGENT DÉSIGNÉ</p>
+    <p id="roll-winner-name" class="roll-winner-name">—</p>
+    <div class="roll-result-btns">
+      <button id="roll-start-btn">&#8627; DÉMARRER LA MISSION</button>
+      <button id="roll-close-btn">FERMER</button>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION OVERLAY -->
+<div id="mission-ol" class="full-ol hidden">
+  <div id="mission-card">
+    <p id="ms-phase" class="ms-phase">PHASE 1</p>
+    <p class="ms-status-lbl">MISSION EN COURS</p>
+    <h2 id="ms-title" class="ms-title">—</h2>
+    <div class="ms-grid">
+      <div class="ms-row"><span class="ms-key">Agent</span><span id="ms-agent" class="ms-val">—</span></div>
+      <div class="ms-row"><span class="ms-key">Début</span><span id="ms-time" class="ms-val">—</span></div>
+      <div class="ms-row"><span class="ms-key">Récompense</span><span id="ms-bc" class="ms-val orange">—</span></div>
+      <div class="ms-row"><span class="ms-key">Statut</span><span id="ms-statut" class="ms-val">En attente</span></div>
+    </div>
+    <div class="ms-btns">
+      <button id="ms-ok">&#10003; MISSION ACCOMPLIE</button>
+      <button id="ms-fail">&#10007; MISSION ÉCHOUÉE</button>
+    </div>
+    <button id="ms-close">&#8592; Fermer</button>
+  </div>
 </div>
 
 <script src="script.js"></script>
