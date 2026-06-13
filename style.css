@@ -266,3 +266,18 @@ body{background:linear-gradient(180deg,#230000 0%,#0b0000 18%,#000 40%,#0f0000 5
 #ms-fail{font-family:var(--orb);font-size:12px;letter-spacing:.2em;padding:14px;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);}
 #ms-fail:disabled{opacity:.4;}
 #ms-close{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:rgba(255,255,255,.3);padding:8px;border:1px solid rgba(255,255,255,.1);}
+/* DT LOCKED */
+.dt-locked{opacity:.75;}
+.dt-locked-body{padding:16px;text-align:center;}
+.dt-locked-q{font-family:var(--orb);font-size:28px;color:rgba(255,255,255,.15);letter-spacing:.6em;margin-bottom:10px;}
+.dt-locked-hint{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.25em;}
+
+/* GAGE CARD PENDING */
+.gage-card.pending{border-color:rgba(255,150,0,.55);background:rgba(80,40,0,.3);}
+.gage-card.pending:active{background:rgba(120,60,0,.4);}
+.gage-pending{font-family:var(--mono);font-size:8px;color:rgba(255,160,0,.8);letter-spacing:.2em;}
+
+/* CHAT FONT NORMALIZATION */
+.msg-text{font-size:12px !important;line-height:1.7;}
+.chat-msg.sys-msg .msg-text{font-size:11px !important;color:rgba(0,255,65,.6);}
+.msg-sep{font-size:12px;line-height:1.7;}
