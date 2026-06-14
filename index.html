@@ -209,6 +209,7 @@
     <div class="roll-ptr">&#9660;</div>
     <canvas id="roll-cv" width="280" height="280"></canvas>
   </div>
+  <button id="roll-pre-close" class="roll-pre-close">&#8592; Annuler</button>
   <button id="roll-btn">TOURNER</button>
   <div id="roll-result" class="hidden">
     <p class="roll-winner-label">AGENT DÉSIGNÉ</p>
@@ -237,6 +238,29 @@
       <button id="ms-fail">&#10007; MISSION ÉCHOUÉE</button>
     </div>
     <button id="ms-close">&#8592; Fermer</button>
+  </div>
+</div>
+
+
+<!-- DT OVERLAY -->
+<div id="dt-ol" class="full-ol hidden">
+  <div class="dt-ol-top">
+    <p class="dt-ol-phase-lbl">PHASE 1 — DOUBLE TROUBLE</p>
+    <h2 class="dt-ol-title" id="dt-ol-title-el"></h2>
+  </div>
+  <div id="dt-ol-teams" class="dt-ol-teams"></div>
+  <p class="dt-ol-note" id="dt-ol-note"></p>
+  <div id="dt-countdown-wrap" class="dt-countdown-wrap hidden">
+    <div id="dt-count-num" class="dt-count-num">3</div>
+  </div>
+  <div id="dt-ol-actions">
+    <button id="dt-ol-start-btn" class="dt-ol-start-btn">&#9654; COMMENCER</button>
+    <button id="dt-ol-cancel-btn" class="dt-ol-cancel-btn">&#8592; Fermer</button>
+  </div>
+  <div id="dt-go-section" class="dt-go-section hidden">
+    <div class="dt-go-txt">GO !</div>
+    <p class="dt-go-sub">Première équipe revenue = +5 BC bonus par participant</p>
+    <button id="dt-ol-done-btn" class="dt-complete-btn">&#10003; DOUBLE TROUBLE ACCOMPLI</button>
   </div>
 </div>
 
