@@ -307,3 +307,35 @@ body{background:linear-gradient(180deg,#230000 0%,#0b0000 18%,#000 40%,#0f0000 5
 .dt-complete-btn{width:100%;font-family:var(--orb);font-size:11px;letter-spacing:.25em;padding:13px;background:rgba(0,255,65,.07);border:1px solid rgba(0,255,65,.4);color:#00ff41;margin-top:12px;}
 .dt-complete-btn:active{background:rgba(0,255,65,.2);}
 .dt-done-lbl{font-family:var(--mono);font-size:9px;color:rgba(0,255,65,.65);letter-spacing:.2em;margin-top:10px;text-align:right;}
+
+/* PRE-SPIN CLOSE BUTTON */
+.roll-pre-close{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:rgba(255,255,255,.35);padding:8px 20px;border:1px solid rgba(255,255,255,.12);margin-bottom:4px;align-self:flex-start;}
+.roll-pre-close:active{color:rgba(255,255,255,.7);}
+
+/* DT LAUNCH BUTTON */
+.dt-launch-btn{width:100%;font-family:var(--orb);font-size:12px;font-weight:700;letter-spacing:.3em;padding:14px;background:rgba(204,0,0,.18);border:2px solid rgba(204,0,0,.7);color:var(--white);margin-top:12px;animation:actGl 2s ease-in-out infinite;}
+.dt-launch-btn:active{background:rgba(204,0,0,.35);}
+
+/* DT OVERLAY */
+#dt-ol{gap:14px;}
+.dt-ol-top{text-align:center;width:100%;max-width:380px;}
+.dt-ol-phase-lbl{font-family:var(--mono);font-size:9px;color:rgba(204,0,0,.7);letter-spacing:.4em;}
+.dt-ol-title{font-family:var(--pir);font-size:clamp(22px,6vw,30px);color:var(--white);margin-top:4px;}
+.dt-ol-teams{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:380px;}
+.dt-ol-team{border:1px solid rgba(204,0,0,.35);padding:12px;background:rgba(0,0,0,.3);}
+.dt-ol-team-label{font-family:var(--orb);font-size:10px;font-weight:700;color:var(--red2);letter-spacing:.12em;margin-bottom:6px;}
+.dt-ol-task{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.5);line-height:1.5;margin-bottom:8px;}
+.dt-ol-players{display:flex;flex-direction:column;gap:4px;}
+.dt-ol-player{font-family:var(--orb);font-size:13px;font-weight:700;color:var(--white);background:rgba(204,0,0,.2);padding:6px 10px;text-align:center;border:1px solid rgba(204,0,0,.3);}
+.dt-ol-note{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.2em;text-align:center;}
+#dt-ol-actions{display:flex;flex-direction:column;gap:8px;width:100%;max-width:320px;}
+.dt-ol-start-btn{font-family:var(--orb);font-size:14px;font-weight:700;letter-spacing:.35em;padding:16px;background:transparent;border:2px solid var(--red);color:var(--white);animation:actGl 2s ease-in-out infinite;}
+.dt-ol-start-btn:active{background:rgba(204,0,0,.2);}
+.dt-ol-cancel-btn{font-family:var(--mono);font-size:10px;letter-spacing:.3em;padding:10px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.35);}
+.dt-countdown-wrap{display:flex;align-items:center;justify-content:center;width:100%;height:160px;}
+.dt-count-num{font-family:var(--orb);font-size:130px;font-weight:900;color:var(--red2);line-height:1;text-shadow:0 0 60px rgba(204,0,0,.9),0 0 120px rgba(204,0,0,.4);}
+.dt-count-anim{animation:dtFlip .55s cubic-bezier(.23,1.3,.7,1) both;}
+@keyframes dtFlip{from{transform:perspective(600px) rotateX(-90deg) scale(1.4);opacity:0}to{transform:perspective(600px) rotateX(0) scale(1);opacity:1}}
+.dt-go-section{text-align:center;width:100%;max-width:360px;}
+.dt-go-txt{font-family:var(--orb);font-size:80px;font-weight:900;color:#00ff41;text-shadow:0 0 40px rgba(0,255,65,.8);animation:dtFlip .5s cubic-bezier(.23,1.3,.7,1) both;line-height:1;}
+.dt-go-sub{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.25em;margin:10px 0 16px;line-height:1.8;}
