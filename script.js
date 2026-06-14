@@ -200,6 +200,7 @@ function initApp(){
   document.querySelectorAll('.aide-btn').forEach(b=>b.addEventListener('click',()=>openAide(b.dataset.aide)));
   document.getElementById('purch-yes').addEventListener('click',confirmPurch);
   document.getElementById('purch-no').addEventListener('click',cancelPurch);
+  document.getElementById('roll-pre-close').addEventListener('click',()=>{document.getElementById('roulette-ol').classList.add('hidden');});
   document.getElementById('roll-btn').addEventListener('click',spinRoulette);
   document.getElementById('roll-start-btn').addEventListener('click',startMissionFromRoulette);
   document.getElementById('roll-close-btn').addEventListener('click',()=>{
@@ -210,7 +211,13 @@ function initApp(){
   });
   document.getElementById('ms-ok').addEventListener('click',completeMission);
   document.getElementById('ms-fail').addEventListener('click',failMission);
-  document.getElementById('ms-close').addEventListener('click',()=>document.getElementById('mission-ol').classList.add('hidden'));
+  document.getElementById('ms-close').addEventListener('click',()=>{
+    if(mCurrentGage&&mWinnerIdx>=0&&!S.doneGages?.includes(mCurrentGage.id)){
+      S.pendingMission={gageId:mCurrentGage.id,playerIdx:mWinnerIdx};save();
+    }
+    document.getElementById('mission-ol').classList.add('hidden');
+    renderGages();
+  });
   showPage(S.lastView||'home');
 }
 
@@ -297,9 +304,11 @@ function renderGages(){
   if(ph.contracts&&ph.contracts.length){html+=`<div class="contracts-section"><div class="contracts-title">CONTRATS BRADDY3000</div>`;if(contractsLocked){html+=`<div class="contract-locked"><p class="contract-locked-q">???</p><p class="contract-locked-hint">Se débloque après le Double Trouble</p></div>`;}else{ph.contracts.forEach(c=>{html+=`<div class="contract-card"><div class="contract-name">${c.name}</div><div class="contract-desc">${c.desc}</div><div class="contract-reward">${c.reward}</div></div>`;});}html+='</div>';}
   html+=`<div class="braddy-analyzing"><div class="adots"><div class="adot"></div><div class="adot"></div><div class="adot"></div></div><p>Brad analyse votre position actuelle</p></div>`;
   body.innerHTML=html;
-  document.querySelectorAll('.gage-card:not(.done)').forEach(card=>{card.addEventListener('click',()=>{const gid=card.dataset.gid;const ph2=PHASES[Math.min(S.phase,5)];const g=ph2.gages.find(x=>x.id===gid);if(!g)return;if(S.pendingMission&&S.pendingMission.gageId===gid){const pidx=S.pendingMission.playerIdx;S.pendingMission=null;save();openMission(g,pidx);return;}if(ph2.directAssignment){flash(100,true);setTimeout(()=>openMission(g,Math.floor(Math.random()*4)),200);}else{openRoulette(g);}});});
+  document.querySelectorAll('.gage-card:not(.done)').forEach(card=>{card.addEventListener('click',()=>{const gid=card.dataset.gid;const ph2=PHASES[Math.min(S.phase,5)];const g=ph2.gages.find(x=>x.id===gid);if(!g)return;if(S.pendingMission&&S.pendingMission.gageId===gid){openMission(g,S.pendingMission.playerIdx);return;}if(ph2.directAssignment){flash(100,true);setTimeout(()=>openMission(g,Math.floor(Math.random()*4)),200);}else{openRoulette(g);}});});
   const dtBtn=document.getElementById('dt-done-btn');
   if(dtBtn){dtBtn.addEventListener('click',()=>{S.doneDT=true;save();beep(440,.5,.1,'sine');bradMsg('Double Trouble... accompli. Le BRADDY3000 prend note. Ce niveau de bradification est... acceptable.');checkPhase1Complete();renderGages();});}
+  const launchBtn=document.getElementById('dt-launch-btn');
+  if(launchBtn){launchBtn.addEventListener('click',openDTInterface);}
 }
 
 /* ROULETTE */
@@ -321,6 +330,7 @@ function openRoulette(gage){
   document.getElementById('roll-btn').disabled=false;
   const excl=S.phaseExcluded?.length||0;
   document.getElementById('roll-btn').textContent=excl?`TOURNER (${4-excl} restants)`:'TOURNER';
+  document.getElementById('roll-pre-close').style.display='';
   document.getElementById('roulette-ol').classList.remove('hidden');
   setTimeout(()=>drawRoulette(rAngle),50);
 }
@@ -385,6 +395,7 @@ function spinRoulette(){
       setTimeout(()=>shake(5,300),100);
       document.getElementById('roll-winner-name').textContent=players[targetLocal].name.toUpperCase();
       document.getElementById('roll-result').classList.remove('hidden');
+      document.getElementById('roll-pre-close').style.display='none';
     }
   })(performance.now());
 }
@@ -397,7 +408,7 @@ function openMission(gage,winnerIdx){mCurrentGage=gage;mWinnerIdx=winnerIdx;cons
 function completeMission(){if(!mCurrentGage)return;const pk=R_KEYS[mWinnerIdx];S.coins[pk]=(S.coins[pk]||0)+mCurrentGage.bc;if(!S.doneGages)S.doneGages=[];if(!S.doneGages.includes(mCurrentGage.id))S.doneGages.push(mCurrentGage.id);
   if(!S.phaseExcluded)S.phaseExcluded=[];
   if(!S.phaseExcluded.includes(R_KEYS[mWinnerIdx]))S.phaseExcluded.push(R_KEYS[mWinnerIdx]);S.pendingMission=null;save();document.getElementById('ms-statut').textContent='✓ ACCOMPLIE';document.getElementById('ms-ok').disabled=true;document.getElementById('ms-fail').disabled=true;beep(440,.5,.1,'sine');checkPhase1Complete();bradMsg(`Excellent. ${R_PLAYERS[mWinnerIdx]} a accompli la mission "${mCurrentGage.name}". +${mCurrentGage.bc} BC crédités. Le BRADDY3000 enregistre cette contribution.`);setTimeout(()=>{document.getElementById('mission-ol').classList.add('hidden');renderGages();},2000);}
-function failMission(){document.getElementById('ms-statut').textContent='✗ ÉCHOUÉE';document.getElementById('ms-ok').disabled=true;document.getElementById('ms-fail').disabled=true;S.pendingMission=null;save();bradMsg(`Mission échouée. Le BRADDY3000 est déçu. Ce n'est pas un jugement. Si.`);setTimeout(()=>document.getElementById('mission-ol').classList.add('hidden'),1500);}
+function failMission(){document.getElementById('ms-statut').textContent='✗ ÉCHOUÉE';document.getElementById('ms-ok').disabled=true;document.getElementById('ms-fail').disabled=true;bradMsg(`Mission échouée. Le BRADDY3000 est déçu. Ce n'est pas un jugement. Si.`);setTimeout(()=>{document.getElementById('mission-ol').classList.add('hidden');renderGages();},1500);}
 
 /* BRADDY3000 */
 function renderBraddy(){const b=document.getElementById('braddy-body'),ph=S.phase,dc=ph*20,ka=ph===0?3:Math.min(3+ph*18,97),rl=Math.floor(Math.random()*25+ph*10+20);b.innerHTML=`<div class="stat-block"><div class="stat-label">DONNÉES COLLECTÉES</div><div class="stat-bar-wrap"><div class="stat-bar" style="width:${dc}%"></div></div><div class="stat-value-row"><div class="stat-val">${dc}<span style="font-size:.6em;opacity:.5">%</span></div><div class="stat-unit">PHASE ${ph}/5</div></div></div><div class="stat-block"><div class="stat-label">LOCALISATION KIRBY 67</div><div class="stat-bar-wrap"><div class="stat-bar yellow" style="width:${ka}%"></div></div><div class="stat-value-row"><div class="stat-val">${ka}<span style="font-size:.6em;opacity:.5">%</span></div><div class="stat-unit">PRÉCISION</div></div></div><div class="stat-block"><div class="stat-label">FIABILITÉ DU BRADDY3000</div><div class="stat-bar-wrap"><div class="stat-bar green" style="width:${rl}%"></div></div><div class="stat-value-row"><div class="stat-val">${rl}<span style="font-size:.6em;opacity:.5">%</span></div><div class="stat-unit">ESTIMÉ</div></div></div><div class="fun-stat"><div>> Température du grille-pain de Brad : <span>42°C</span></div><div>> Niveau de sérieux : <span>3%</span></div><div>> Charabia généré : <span>${Math.floor(Math.random()*999)+100} TB</span></div><div>> Taux de bradification : <span>94.7%</span></div><div>> Grille-pains détectés : <span>1 (perdu)</span></div><div>> Probabilité que tout se passe bien : <span>incalculable</span></div></div>`;}
@@ -454,9 +465,77 @@ function sendMsg(){const inp=document.getElementById('chat-inp');const txt=inp.v
   if(txt==='/debug.reset.gages'){S.doneGages=[];save();renderGages();addSysMsg('Gages accomplis réinitialisés.');return;}
   if(txt.startsWith('/test.gage ')){const gid=txt.slice(11).trim();let found=null;PHASES.forEach(ph=>ph.gages?.forEach(g=>{if(g.id===gid)found=g;}));if(found){addSysMsg(`TEST ROULETTE — ${found.name}`);setTimeout(()=>openRoulette(found),300);}else{addSysMsg(`Gage "${gid}" introuvable.`);addSysMsg('IDs disponibles : p1g1 p1g2 p1g3 p1g4 | p2g1 p2g2 p2g3 p2g4 | p4g1 | p5g1 p5g2 p5g3 p5g4');}return;}
   if(txt.startsWith('/test.mission ')){const gid=txt.slice(14).trim();let found=null;PHASES.forEach(ph=>ph.gages?.forEach(g=>{if(g.id===gid)found=g;}));if(found){addSysMsg(`TEST MISSION — ${found.name}`);setTimeout(()=>openMission(found,Math.floor(Math.random()*4)),300);}else{addSysMsg(`Gage "${gid}" introuvable.`);}return;}
+  if(txt.startsWith('/add.coins:')){const pts=txt.split(':');if(pts.length===3){const ltr=pts[1].toUpperCase(),amt=parseInt(pts[2]);const pm={'H':'hippolyte','T':'teo','E':'edwin','N':'nathanael'};const pk=pm[ltr];if(pk&&!isNaN(amt)&&amt>0){S.coins[pk]=(S.coins[pk]||0)+amt;save();addSysMsg(`+${amt} BC → ${DISPLAY_NAMES[R_KEYS.indexOf(pk)]}`);renderBraddy();}else addSysMsg('Format: /add.coins:H:50 — Lettres: H T E N');}else addSysMsg('Format: /add.coins:H:50');return;}
   if(txt==='/debug.help'||txt==='/help.debug'){addSysMsg('— COMMANDES DEBUG —');addSysMsg('/debug → état général (phase, BC, gages)');addSysMsg('/debug.gages → liste tous les gages de toutes les phases');addSysMsg('/debug.coins → soldes BradCoins de chacun');addSysMsg('/debug.reset.gages → réinitialise les gages accomplis');addSysMsg('/test.gage [id] → teste la roulette (ex: /test.gage p1g1)');addSysMsg('/test.mission [id] → ouvre mission directement (ex: /test.mission p2g3)');addSysMsg('IDs gages → p1g1-p1g4 | p2g1-p2g4 | p4g1 | p5g1-p5g4');return;}
   const upper=txt.toUpperCase();if(CFG.phaseCodes[upper]!==undefined){advancePhase(CFG.phaseCodes[upper]);addSysMsg(`CODE VALIDE — Phase ${CFG.phaseCodes[upper]} débloquée.`);return;}
   addUserMsg(txt);const lower=txt.toLowerCase();let resp=null;for(const[kw,rs]of Object.entries(RESPONSES)){if(lower.includes(kw)){resp=rs[Math.floor(Math.random()*rs.length)];break;}}if(!resp)resp=FALLBACK[Math.floor(Math.random()*FALLBACK.length)];bradMsg(resp);}
+
+
+/* DOUBLE TROUBLE INTERFACE */
+function openDTInterface(){
+  const shuffled=[...DISPLAY_NAMES].map((n,i)=>({name:n,key:R_KEYS[i]})).sort(()=>Math.random()-.5);
+  const teamA=shuffled.slice(0,2),teamB=shuffled.slice(2,4);
+  const ph=PHASES[Math.min(S.phase,5)];
+  document.getElementById('dt-ol-title-el').innerHTML=`${BOLT_SVG} DOUBLE TROUBLE ${BOLT_SVG}`;
+  document.getElementById('dt-ol-note').textContent='Petite quantité uniquement — éviter le gaspillage';
+  document.getElementById('dt-ol-teams').innerHTML=`
+    <div class="dt-ol-team dt-ol-a">
+      <div class="dt-ol-team-label">ÉQUIPE A — FROMAGE</div>
+      <div class="dt-ol-task">${ph.dt?.a||'Trouver du fromage à raclette.'}</div>
+      <div class="dt-ol-players">${teamA.map(p=>`<div class="dt-ol-player">${p.name}</div>`).join('')}</div>
+    </div>
+    <div class="dt-ol-team dt-ol-b">
+      <div class="dt-ol-team-label">ÉQUIPE B — CHARCUTERIE</div>
+      <div class="dt-ol-task">${ph.dt?.b||'Trouver du Serrano.'}</div>
+      <div class="dt-ol-players">${teamB.map(p=>`<div class="dt-ol-player">${p.name}</div>`).join('')}</div>
+    </div>`;
+  const ol=document.getElementById('dt-ol');
+  ol.classList.remove('hidden');
+  document.getElementById('dt-countdown-wrap').classList.add('hidden');
+  document.getElementById('dt-go-section').classList.add('hidden');
+  document.getElementById('dt-ol-actions').classList.remove('hidden');
+  document.getElementById('dt-ol-start-btn').disabled=false;
+  // Wire buttons
+  const startBtn=document.getElementById('dt-ol-start-btn');
+  const cancelBtn=document.getElementById('dt-ol-cancel-btn');
+  const doneBtn=document.getElementById('dt-ol-done-btn');
+  const newStart=startBtn.cloneNode(true);startBtn.parentNode.replaceChild(newStart,startBtn);
+  const newCancel=cancelBtn.cloneNode(true);cancelBtn.parentNode.replaceChild(newCancel,cancelBtn);
+  const newDone=doneBtn.cloneNode(true);doneBtn.parentNode.replaceChild(newDone,doneBtn);
+  document.getElementById('dt-ol-cancel-btn').addEventListener('click',()=>ol.classList.add('hidden'));
+  document.getElementById('dt-ol-start-btn').addEventListener('click',()=>{
+    document.getElementById('dt-ol-actions').classList.add('hidden');
+    startDTCountdown();
+  });
+  document.getElementById('dt-ol-done-btn').addEventListener('click',()=>{
+    S.doneDT=true;save();ol.classList.add('hidden');
+    beep(440,.5,.1,'sine');checkPhase1Complete();renderGages();
+    bradMsg('Double Trouble... accompli. Le BRADDY3000 enregistre le résultat. Bien joué aux deux équipes.');
+  });
+}
+
+function startDTCountdown(){
+  const wrap=document.getElementById('dt-countdown-wrap');
+  const numEl=document.getElementById('dt-count-num');
+  wrap.classList.remove('hidden');
+  let n=3;
+  function tick(){
+    numEl.textContent=n;
+    numEl.className='dt-count-num dt-count-anim';
+    void numEl.offsetWidth;
+    numEl.className='dt-count-num dt-count-anim';
+    beep(n===1?660:440,.25,.15,'sine');
+    if(n>1){n--;setTimeout(tick,950);}
+    else{
+      setTimeout(()=>{
+        flash(200,true);beep(880,.4,.2,'sine');shake(4,300);
+        wrap.classList.add('hidden');
+        document.getElementById('dt-go-section').classList.remove('hidden');
+      },900);
+    }
+  }
+  setTimeout(tick,200);
+}
 
 /* RESET ANIMATION */
 function launchResetAnimation(){
