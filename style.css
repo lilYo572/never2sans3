@@ -281,3 +281,29 @@ body{background:linear-gradient(180deg,#230000 0%,#0b0000 18%,#000 40%,#0f0000 5
 .msg-text{font-size:12px !important;line-height:1.7;}
 .chat-msg.sys-msg .msg-text{font-size:11px !important;color:rgba(0,255,65,.6);}
 .msg-sep{font-size:12px;line-height:1.7;}
+
+/* MAP PANEL */
+.map-panel{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.93);border-top:1px solid rgba(204,0,0,.5);z-index:10;padding:12px 16px;animation:slideUp .2s ease;}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.mp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.mp-title{font-family:var(--orb);font-size:11px;font-weight:700;color:var(--red2);letter-spacing:.25em;}
+.mp-close{font-family:var(--mono);font-size:15px;color:rgba(255,255,255,.45);padding:2px 8px;border:1px solid rgba(255,255,255,.15);}
+.mp-body{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.7);}
+.mi-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.mi-row span:last-child{color:var(--orange);font-family:var(--orb);font-size:10px;font-weight:700;}
+.mi-scores-label{font-size:8px;color:rgba(255,255,255,.25);letter-spacing:.3em;margin:8px 0 5px;}
+.mi-scores{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.mi-score{display:flex;justify-content:space-between;background:rgba(255,255,255,.04);padding:5px 8px;border:1px solid rgba(255,255,255,.06);}
+.mi-score span:last-child{color:var(--orange);font-family:var(--orb);font-size:10px;font-weight:700;}
+.zone-marker:not(.locked){cursor:pointer;}
+.zone-marker:not(.locked):active .zone-dot{background:rgba(204,0,0,.7);box-shadow:0 0 22px rgba(204,0,0,.8);}
+
+/* CONTRACT LOCKED */
+.contract-locked{padding:14px;text-align:center;border:1px solid rgba(120,0,200,.2);background:rgba(50,0,100,.1);margin-bottom:4px;}
+.contract-locked-q{font-family:var(--orb);font-size:22px;color:rgba(255,255,255,.1);letter-spacing:.6em;}
+.contract-locked-hint{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.28);margin-top:6px;letter-spacing:.2em;}
+
+/* DT COMPLETE BUTTON */
+.dt-complete-btn{width:100%;font-family:var(--orb);font-size:11px;letter-spacing:.25em;padding:13px;background:rgba(0,255,65,.07);border:1px solid rgba(0,255,65,.4);color:#00ff41;margin-top:12px;}
+.dt-complete-btn:active{background:rgba(0,255,65,.2);}
+.dt-done-lbl{font-family:var(--mono);font-size:9px;color:rgba(0,255,65,.65);letter-spacing:.2em;margin-top:10px;text-align:right;}
